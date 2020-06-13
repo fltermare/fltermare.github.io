@@ -10,12 +10,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker x Tensorflow x Mxnet x GPU">
 <meta property="og:url" content="http://yoursite.com/2020/06/12/Docker-x-Tensorflow-x-Mxnet-x-GPU/index.html">
-<meta property="og:site_name" content="Memo">
+<meta property="og:site_name" content="Fltermare Learning Note">
 <meta property="og:description" content="前言先前的經驗告訴我，建個 GPU 訓練環境是很麻煩的事   最近想學習一下 Computer Vision，是時候再來弄個環境原先在猜，如果用 container 的方式來做說不定會比較簡單，也容易搬到別的地方部屬   結果，還是有不少眉眉角角的地方要注意目前看來，應該有比較好 deploy 吧？ Pre-installation簡單說明安裝前的環境  Ubuntu 18.04 LTS Dock">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-06-12T14:16:22.000Z">
-<meta property="article:modified_time" content="2020-06-12T16:09:12.436Z">
-<meta property="article:author" content="Albert Su">
+<meta property="article:modified_time" content="2020-06-13T00:26:44.181Z">
+<meta property="article:author" content="fltermare">
 <meta name="twitter:card" content="summary">
     
     
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pre-installation"><span class="toc-number">2.</span> <span class="toc-text">Pre-installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">3.</span> <span class="toc-text">Installation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Driver"><span class="toc-number">3.1.</span> <span class="toc-text">Nvidia Driver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Container-Runtime"><span class="toc-number">3.2.</span> <span class="toc-text">Nvidia Container Runtime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-Docker-Image"><span class="toc-number">3.3.</span> <span class="toc-text">Build Docker Image</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pre-installation"><span class="toc-number">2.</span> <span class="toc-text">Pre-installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">3.</span> <span class="toc-text">Installation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Driver"><span class="toc-number">3.1.</span> <span class="toc-text">Nvidia Driver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Container-Runtime"><span class="toc-number">3.2.</span> <span class="toc-text">Nvidia Container Runtime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-Docker-Image"><span class="toc-number">3.3.</span> <span class="toc-text">Build Docker Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verification"><span class="toc-number">3.4.</span> <span class="toc-text">Verification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Launch-with-jupyter-lab"><span class="toc-number">3.5.</span> <span class="toc-text">Launch with jupyter lab</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -124,12 +124,14 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">Memo</span>
+        <span itemprop="name">Fltermare Learning Note</span>
       </span>
       
     <div class="postdate">
       
         <time datetime="2020-06-12T14:16:22.000Z" itemprop="datePublished">2020-06-12</time>
+        
+        (Updated: <time datetime="2020-06-13T00:26:44.181Z" itemprop="dateModified">2020-06-13</time>)
         
       
     </div>
@@ -184,11 +186,25 @@
 </li>
 </ol>
 <ol start="5">
-<li><p>在 Dockerfile 同一個資料夾下 build image</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;IMAGE NAME&gt; .</span><br></pre></td></tr></table></figure>
+<li>在 Dockerfile 同一個資料夾下 build image <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;IMAGE NAME&gt; .</span><br></pre></td></tr></table></figure>
+
 </li>
-<li><p>enjoy</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -p 8888:8888 -v $(pwd):&#x2F;home&#x2F;user &lt;IMAGE NAME&gt; \</span><br><span class="line">jupyter lab --ip&#x3D;0.0.0.0 --port&#x3D;8888 --notebook-dir&#x3D;&#x2F;home&#x2F;user</span><br></pre></td></tr></table></figure>
+</ol>
+<h3 id="Verification"><a href="#Verification" class="headerlink" title="Verification"></a>Verification</h3><ol start="6">
+<li>借 tensorflow 跟 mxnet 官方文件的指令來測試，GPU環境是否一切安好<ul>
+<li>tensorflow  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -it --rm &lt;IMAGE NAME&gt; \</span><br><span class="line">python -c &quot;import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;</span><br></pre></td></tr></table></figure></li>
+<li>mxnet<ul>
+<li>Launch the container<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -it --rm &lt;IMAGE NAME&gt; bash</span><br></pre></td></tr></table></figure></li>
+<li>Start the python terminal and test it<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = mx.nd.ones((<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.asnumpy()</span><br><span class="line">array([[ <span class="number">3.</span>,  <span class="number">3.</span>,  <span class="number">3.</span>],</span><br><span class="line">       [ <span class="number">3.</span>,  <span class="number">3.</span>,  <span class="number">3.</span>]], dtype=float32)</span><br></pre></td></tr></table></figure>
+沒有 error，就沒事啦</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Launch-with-jupyter-lab"><a href="#Launch-with-jupyter-lab" class="headerlink" title="Launch with jupyter lab"></a>Launch with jupyter lab</h3><ol start="7">
+<li>enjoy <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -p 8888:8888 -v $(pwd):&#x2F;home&#x2F;user &lt;IMAGE NAME&gt; \</span><br><span class="line">jupyter lab --ip&#x3D;0.0.0.0 --port&#x3D;8888 --notebook-dir&#x3D;&#x2F;home&#x2F;user</span><br></pre></td></tr></table></figure>
 
 
 </li>
@@ -223,7 +239,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pre-installation"><span class="toc-number">2.</span> <span class="toc-text">Pre-installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">3.</span> <span class="toc-text">Installation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Driver"><span class="toc-number">3.1.</span> <span class="toc-text">Nvidia Driver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Container-Runtime"><span class="toc-number">3.2.</span> <span class="toc-text">Nvidia Container Runtime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-Docker-Image"><span class="toc-number">3.3.</span> <span class="toc-text">Build Docker Image</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pre-installation"><span class="toc-number">2.</span> <span class="toc-text">Pre-installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">3.</span> <span class="toc-text">Installation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Driver"><span class="toc-number">3.1.</span> <span class="toc-text">Nvidia Driver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nvidia-Container-Runtime"><span class="toc-number">3.2.</span> <span class="toc-text">Nvidia Container Runtime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-Docker-Image"><span class="toc-number">3.3.</span> <span class="toc-text">Build Docker Image</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verification"><span class="toc-number">3.4.</span> <span class="toc-text">Verification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Launch-with-jupyter-lab"><span class="toc-number">3.5.</span> <span class="toc-text">Launch with jupyter lab</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">4.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -259,8 +275,8 @@
     Copyright &copy;
     
     
-    2016-2020
-    Albert Su
+    2020
+    fltermare
   </div>
   <div class="footer-right">
     <nav>
