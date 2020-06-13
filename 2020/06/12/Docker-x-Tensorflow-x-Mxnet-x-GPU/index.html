@@ -14,7 +14,7 @@
 <meta property="og:description" content="前言先前的經驗告訴我，建個 GPU 訓練環境是很麻煩的事   最近想學習一下 Computer Vision，是時候再來弄個環境原先在猜，如果用 container 的方式來做說不定會比較簡單，也容易搬到別的地方部屬   結果，還是有不少眉眉角角的地方要注意目前看來，應該有比較好 deploy 吧？ Pre-installation簡單說明安裝前的環境  Ubuntu 18.04 LTS Dock">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-06-12T14:16:22.000Z">
-<meta property="article:modified_time" content="2020-06-13T00:36:51.836Z">
+<meta property="article:modified_time" content="2020-06-13T00:43:16.146Z">
 <meta property="article:author" content="fltermare">
 <meta name="twitter:card" content="summary">
     
@@ -131,7 +131,7 @@
       
         <time datetime="2020-06-12T14:16:22.000Z" itemprop="datePublished">2020-06-12</time>
         
-        (Updated: <time datetime="2020-06-13T00:36:51.836Z" itemprop="dateModified">2020-06-13</time>)
+        (Updated: <time datetime="2020-06-13T00:43:16.146Z" itemprop="dateModified">2020-06-13</time>)
         
       
     </div>
@@ -160,55 +160,64 @@
 <p>可以看到，Host 還沒有裝 <code>nvidia-driver</code> 跟 <code>CUDA</code><br>實際上，Host 不用刻意去裝 CUDA。之後直接 pull 別人處理好的 image 就行。<br>除非，你想在 Host 也有個可以使用 GPU training 的環境。</p>
 <p><code>Docker</code>的部份請參考 <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener">https://docs.docker.com/engine/install/ubuntu/</a><br>除非像敝司的網路環境，什麼都要設定 Proxy，不然這官網這一頁就很夠了</p>
 <h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Nvidia-Driver"><a href="#Nvidia-Driver" class="headerlink" title="Nvidia Driver"></a>Nvidia Driver</h3><ol>
-<li><p>先檢查是否有 <code>ubuntu-drivers-common</code> 這個工具 (我的環境是已安裝)<br> 沒有的話，請先安裝</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install ubuntu-drivers-common</span><br></pre></td></tr></table></figure></li>
-<li><p>用 <code>ubuntu-drivers-common</code> 檢查 Driver 狀態</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers devices</span><br></pre></td></tr></table></figure>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D; &#x2F;sys&#x2F;devices&#x2F;pci0000:00&#x2F;0000:00:03.1&#x2F;0000:1c:00.0 &#x3D;&#x3D;</span><br><span class="line">modalias : pci:v000010DEd00001B82sv000019DAsd00002445bc03sc00i00</span><br><span class="line">vendor   : NVIDIA Corporation</span><br><span class="line">model    : GP104 [GeForce GTX 1070 Ti]</span><br><span class="line">driver   : nvidia-driver-415 - third-party free</span><br><span class="line">driver   : nvidia-driver-418 - third-party free</span><br><span class="line">driver   : nvidia-driver-390 - distro non-free</span><br><span class="line">driver   : nvidia-driver-440 - third-party free recommended</span><br><span class="line">driver   : nvidia-driver-435 - distro non-free</span><br><span class="line">driver   : nvidia-driver-410 - third-party free</span><br><span class="line">driver   : xserver-xorg-video-nouveau - distro free builtin</span><br></pre></td></tr></table></figure>
-<p> 實際上，以現在時間(2020-06-12)最新的版本是 <code>nvidia-driver-450</code><br> 但是根據清單，我選擇清單中出現的 <code>nvidia-driver-440</code></p>
-<p> 裝完後，重新開機</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>先檢查是否有 <code>ubuntu-drivers-common</code> 這個工具 (我的環境是已安裝)<br> 沒有的話，請先安裝</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install ubuntu-drivers-common</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用 <code>ubuntu-drivers-common</code> 檢查 Driver 狀態</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers devices</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D; &#x2F;sys&#x2F;devices&#x2F;pci0000:00&#x2F;0000:00:03.1&#x2F;0000:1c:00.0 &#x3D;&#x3D;</span><br><span class="line">modalias : pci:v000010DEd00001B82sv000019DAsd00002445bc03sc00i00</span><br><span class="line">vendor   : NVIDIA Corporation</span><br><span class="line">model    : GP104 [GeForce GTX 1070 Ti]</span><br><span class="line">driver   : nvidia-driver-415 - third-party free</span><br><span class="line">driver   : nvidia-driver-418 - third-party free</span><br><span class="line">driver   : nvidia-driver-390 - distro non-free</span><br><span class="line">driver   : nvidia-driver-440 - third-party free recommended</span><br><span class="line">driver   : nvidia-driver-435 - distro non-free</span><br><span class="line">driver   : nvidia-driver-410 - third-party free</span><br><span class="line">driver   : xserver-xorg-video-nouveau - distro free builtin</span><br></pre></td></tr></table></figure>
+<pre><code>實際上，以現在時間(2020-06-12)最新的版本是 `nvidia-driver-450`  
+但是根據清單，我選擇清單中出現的 `nvidia-driver-440`
+
+裝完後，重新開機</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
 <h3 id="Nvidia-Container-Runtime"><a href="#Nvidia-Container-Runtime" class="headerlink" title="Nvidia Container Runtime"></a>Nvidia Container Runtime</h3><ol start="3">
-<li>接著安裝 <code>nvidia-container-runtime</code> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nvidia-container-runtime</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>接著安裝 <code>nvidia-container-runtime</code></li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nvidia-container-runtime</span><br></pre></td></tr></table></figure>
+
 <h3 id="Build-Docker-Image"><a href="#Build-Docker-Image" class="headerlink" title="Build Docker Image"></a>Build Docker Image</h3><ol start="4">
 <li><p>以下是我的 Dockerfile (也可以 pull 後再修改)</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM tensorflow&#x2F;tensorflow:latest-gpu-py3</span><br><span class="line"></span><br><span class="line">ENV LC_ALL C.UTF-8</span><br><span class="line">ENV LANG C.UTF-8</span><br><span class="line">ENV LANGUAGE C.UTF-8</span><br><span class="line"></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y libsm6 libxext6 libxrender-dev </span><br><span class="line"></span><br><span class="line">RUN useradd --create-home --shell &#x2F;bin&#x2F;bash user</span><br><span class="line">WORKDIR &#x2F;home&#x2F;user</span><br><span class="line"></span><br><span class="line">RUN python3 -m pip install -U pip setuptools</span><br><span class="line">RUN python3 -m pip install jupyterlab gluoncv opencv-python pandas numpy ensemble-boxes</span><br><span class="line">RUN python3 -m pip install mxnet-cu101</span><br></pre></td></tr></table></figure>
-<p> <strong>* 注意 base image (tensorflow/tensorflow:latest-gpu-py3) 中的 <code>CUDA</code> 版本</strong><br> 檢查 (tensorflow, CUDA) &amp; (mxnet, CUDA) 版本對應是否正確  </p>
+
+<p> <strong>注意 base image (tensorflow/tensorflow:latest-gpu-py3) 中的 <code>CUDA</code> 版本</strong><br> 檢查 (tensorflow, CUDA) &amp; (mxnet, CUDA) 版本對應是否正確  </p>
 <p> 原則上，從 tensorflow 抓的 image， tensorflow 跟 CUDA 的版本是沒有問題的<br> 但我還想使用 mxnet， 所以要去確認 image 的 CUDA 版本  </p>
 <p> run container，到 <code>/usr/local</code> 確認 CUDA 版本<br> 我這裡是 cuda-10-1，所以安裝 mxnet-cu101  </p>
-<p> p.s. 不曉得為什麼，在 container 用 <code>nvidia-smi</code> 測試，顯示是 10.2  </p>
+<p> p.s. 不曉得為什麼，在 container 用 <code>nvidia-smi</code> 測試，顯示是 10.2</p>
+</li>
+<li><p>在 Dockerfile 同一個資料夾下 build image</p>
 </li>
 </ol>
-<ol start="5">
-<li>在 Dockerfile 同一個資料夾下 build image <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;IMAGE NAME&gt; .</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t &lt;IMAGE NAME&gt; .</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <h3 id="Verification"><a href="#Verification" class="headerlink" title="Verification"></a>Verification</h3><ol start="6">
-<li>借 tensorflow 跟 mxnet 官方文件的指令來測試，GPU環境是否一切安好<ul>
-<li>tensorflow<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -it --rm &lt;IMAGE NAME&gt; \</span><br><span class="line">python -c &quot;import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;</span><br></pre></td></tr></table></figure></li>
-<li>mxnet<ul>
-<li>Launch the container<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -it --rm &lt;IMAGE NAME&gt; bash</span><br></pre></td></tr></table></figure></li>
-<li>Start the python terminal and test it<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = mx.nd.ones((<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.asnumpy()</span><br><span class="line">array([[ <span class="number">3.</span>,  <span class="number">3.</span>,  <span class="number">3.</span>],</span><br><span class="line">        [ <span class="number">3.</span>,  <span class="number">3.</span>,  <span class="number">3.</span>]], dtype=float32)</span><br></pre></td></tr></table></figure>
-沒有 error，就沒事啦</li>
+<li><p>借 tensorflow 跟 mxnet 官方文件的指令來測試，GPU環境是否一切安好</p>
+<ul>
+<li><p>tensorflow</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -it --rm &lt;IMAGE NAME&gt; \</span><br><span class="line">python -c &quot;import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>mxnet</p>
+<ul>
+<li>Launch the container</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -it --rm &lt;IMAGE NAME&gt; bash</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Start the python terminal and test it</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = mx.nd.ones((<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b.asnumpy()</span><br><span class="line">array([[ <span class="number">3.</span>,  <span class="number">3.</span>,  <span class="number">3.</span>],</span><br><span class="line">        [ <span class="number">3.</span>,  <span class="number">3.</span>,  <span class="number">3.</span>]], dtype=float32)</span><br></pre></td></tr></table></figure>
+<p>沒有 error，就沒事啦</p>
 </li>
 </ul>
 </li>
 </ol>
 <h3 id="Launch-with-jupyter-lab"><a href="#Launch-with-jupyter-lab" class="headerlink" title="Launch with jupyter lab"></a>Launch with jupyter lab</h3><ol start="7">
-<li>enjoy <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -p 8888:8888 -v $(pwd):&#x2F;home&#x2F;user &lt;IMAGE NAME&gt; \</span><br><span class="line">jupyter lab --ip&#x3D;0.0.0.0 --port&#x3D;8888 --notebook-dir&#x3D;&#x2F;home&#x2F;user</span><br></pre></td></tr></table></figure>
-
-
-</li>
+<li>enjoy</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --gpus all -p 8888:8888 -v $(pwd):&#x2F;home&#x2F;user &lt;IMAGE NAME&gt; \</span><br><span class="line">jupyter lab --ip&#x3D;0.0.0.0 --port&#x3D;8888 --notebook-dir&#x3D;&#x2F;home&#x2F;user</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
 <li><a href="https://www.celantur.com/blog/run-cuda-in-docker-on-linux/" target="_blank" rel="noopener">https://www.celantur.com/blog/run-cuda-in-docker-on-linux/</a></li>
 <li><a href="https://www.tensorflow.org/install/docker#examples_using_gpu-enabled_images" target="_blank" rel="noopener">https://www.tensorflow.org/install/docker#examples_using_gpu-enabled_images</a></li>
