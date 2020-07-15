@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Run12345$ docker run -it --rm &lt;image-name&gt; [COMMAND] [ARG...]* -i : Keep STDIN open even if not attached* -t : Allocate a pseudo-tty* --rm : automatically clean up the container and remove the f">
+    <meta name="description" content="Run12345$ docker run -it --rm &lt;image-name&gt; [COMMAND] [ARG...]-i : Keep STDIN open even if not attached-t : Allocate a pseudo-tty--rm : automatically clean up the container and remove the file sy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker commands">
 <meta property="og:url" content="http://yoursite.com/2020/07/15/Docker-commands/index.html">
 <meta property="og:site_name" content="Fltermare Learning Note">
-<meta property="og:description" content="Run12345$ docker run -it --rm &lt;image-name&gt; [COMMAND] [ARG...]* -i : Keep STDIN open even if not attached* -t : Allocate a pseudo-tty* --rm : automatically clean up the container and remove the f">
+<meta property="og:description" content="Run12345$ docker run -it --rm &lt;image-name&gt; [COMMAND] [ARG...]-i : Keep STDIN open even if not attached-t : Allocate a pseudo-tty--rm : automatically clean up the container and remove the file sy">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-07-15T09:51:50.000Z">
-<meta property="article:modified_time" content="2020-07-15T09:55:17.752Z">
+<meta property="article:modified_time" content="2020-07-15T10:02:03.897Z">
 <meta property="article:author" content="fltermare">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Run"><span class="toc-number">1.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Start-the-stopped-container"><span class="toc-number">2.</span> <span class="toc-text">Start the stopped container</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Save-and-Load-image"><span class="toc-number">3.</span> <span class="toc-text">Save and Load image</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Image-List-Delete"><span class="toc-number">4.</span> <span class="toc-text">Image (List &#x2F; Delete)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Container-List-Delete"><span class="toc-number">5.</span> <span class="toc-text">Container (List &#x2F; Delete)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Commit-save-changed-container"><span class="toc-number">6.</span> <span class="toc-text">Commit (save changed) container</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Run"><span class="toc-number">1.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Start"><span class="toc-number">2.</span> <span class="toc-text">Start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Save-and-Load-image"><span class="toc-number">3.</span> <span class="toc-text">Save and Load image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Image-List-Del"><span class="toc-number">4.</span> <span class="toc-text">Image (List &#x2F; Del)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Container-List-Del"><span class="toc-number">5.</span> <span class="toc-text">Container (List &#x2F; Del)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commit"><span class="toc-number">6.</span> <span class="toc-text">Commit</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -134,7 +134,7 @@
       
         <time datetime="2020-07-15T09:51:50.000Z" itemprop="datePublished">2020-07-15</time>
         
-        (Updated: <time datetime="2020-07-15T09:55:17.752Z" itemprop="dateModified">2020-07-15</time>)
+        (Updated: <time datetime="2020-07-15T10:02:03.897Z" itemprop="dateModified">2020-07-15</time>)
         
       
     </div>
@@ -159,21 +159,25 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm &lt;image-name&gt; [COMMAND] [ARG...]</span><br><span class="line"></span><br><span class="line">* -i : Keep STDIN open even if not attached</span><br><span class="line">* -t : Allocate a pseudo-tty</span><br><span class="line">* --rm : automatically clean up the container and remove the file system when the container exits</span><br></pre></td></tr></table></figure>
+    <h2 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -it --rm &lt;image-name&gt; [COMMAND] [ARG...]</span><br><span class="line"></span><br><span class="line">-i : Keep STDIN open even if not attached</span><br><span class="line">-t : Allocate a pseudo-tty</span><br><span class="line">--rm : automatically clean up the container and remove the file system when the container exits</span><br></pre></td></tr></table></figure>
 <ul>
 <li>ref: <a href="https://docs.docker.com/engine/reference/run/" target="_blank" rel="noopener">Docker run reference</a></li>
 </ul>
-<h1 id="Start-the-stopped-container"><a href="#Start-the-stopped-container" class="headerlink" title="Start the stopped container"></a>Start the stopped container</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker start &lt;container-name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p>start the stopped container</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker start &lt;container-name&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="Save-and-Load-image"><a href="#Save-and-Load-image" class="headerlink" title="Save and Load image"></a>Save and Load image</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save as .tar</span></span><br><span class="line">$ docker save &lt;image-name&gt; &gt; &lt;image-name&gt;.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># load</span></span><br><span class="line">$ docker load &lt; &lt;image-name&gt;.tar</span><br></pre></td></tr></table></figure>
+<h2 id="Save-and-Load-image"><a href="#Save-and-Load-image" class="headerlink" title="Save and Load image"></a>Save and Load image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save as .tar</span></span><br><span class="line">$ docker save &lt;image-name&gt; &gt; &lt;image-name&gt;.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># load</span></span><br><span class="line">$ docker load &lt; &lt;image-name&gt;.tar</span><br></pre></td></tr></table></figure>
 
-<h1 id="Image-List-Delete"><a href="#Image-List-Delete" class="headerlink" title="Image (List / Delete)"></a>Image (List / Delete)</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list</span></span><br><span class="line">$ docker images </span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">$ docker image ls</span><br></pre></td></tr></table></figure>
+<h2 id="Image-List-Del"><a href="#Image-List-Del" class="headerlink" title="Image (List / Del)"></a>Image (List / Del)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list</span></span><br><span class="line">$ docker images </span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">$ docker image ls</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># delete</span></span><br><span class="line">$ docker image rm &lt;image-name&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="Container-List-Delete"><a href="#Container-List-Delete" class="headerlink" title="Container (List / Delete)"></a>Container (List / Delete)</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list all running containers</span></span><br><span class="line">$ docker container ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># list all containers including exited</span></span><br><span class="line">$ docker container ls -a</span><br></pre></td></tr></table></figure>
+<h2 id="Container-List-Del"><a href="#Container-List-Del" class="headerlink" title="Container (List / Del)"></a>Container (List / Del)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list all running containers</span></span><br><span class="line">$ docker container ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># list all containers including exited</span></span><br><span class="line">$ docker container ls -a</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker container rm &lt;container-name&gt;</span><br></pre></td></tr></table></figure>
 
-<h1 id="Commit-save-changed-container"><a href="#Commit-save-changed-container" class="headerlink" title="Commit (save changed) container"></a>Commit (save changed) container</h1><pre><code>$ docker commit &lt;container-id&gt; &lt;image-name&gt;</code></pre><ul>
+<h2 id="Commit"><a href="#Commit" class="headerlink" title="Commit"></a>Commit</h2><p>commit to image<br>[changed container] -&gt; [image]</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker commit &lt;container-id&gt; &lt;image-name&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
 <li>ref: <a href="https://tuhrig.de/difference-between-save-and-export-in-docker/" target="_blank" rel="noopener">Difference between save and export in Docker</a></li>
 </ul>
 
@@ -209,7 +213,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Run"><span class="toc-number">1.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Start-the-stopped-container"><span class="toc-number">2.</span> <span class="toc-text">Start the stopped container</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Save-and-Load-image"><span class="toc-number">3.</span> <span class="toc-text">Save and Load image</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Image-List-Delete"><span class="toc-number">4.</span> <span class="toc-text">Image (List &#x2F; Delete)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Container-List-Delete"><span class="toc-number">5.</span> <span class="toc-text">Container (List &#x2F; Delete)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Commit-save-changed-container"><span class="toc-number">6.</span> <span class="toc-text">Commit (save changed) container</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Run"><span class="toc-number">1.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Start"><span class="toc-number">2.</span> <span class="toc-text">Start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Save-and-Load-image"><span class="toc-number">3.</span> <span class="toc-text">Save and Load image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Image-List-Del"><span class="toc-number">4.</span> <span class="toc-text">Image (List &#x2F; Del)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Container-List-Del"><span class="toc-number">5.</span> <span class="toc-text">Container (List &#x2F; Del)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commit"><span class="toc-number">6.</span> <span class="toc-text">Commit</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
