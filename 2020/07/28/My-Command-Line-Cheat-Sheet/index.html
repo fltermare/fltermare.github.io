@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="tar create tar.gz   1$ tar -zcvf tar-archive-name.tar.gz source-folder-name  extract tar.gz   1$ tar -zxvf tar-archive-name.tar.gz create tar.gz (pigz)   1$ tar cv filename | pigz -6 -p 10 -k &gt; fil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My Command Line Cheat Sheet">
+<meta property="og:url" content="http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/index.html">
+<meta property="og:site_name" content="Fltermare Learning Note">
+<meta property="og:description" content="tar create tar.gz   1$ tar -zcvf tar-archive-name.tar.gz source-folder-name  extract tar.gz   1$ tar -zxvf tar-archive-name.tar.gz create tar.gz (pigz)   1$ tar cv filename | pigz -6 -p 10 -k &gt; fil">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-07-28T14:24:06.000Z">
+<meta property="article:modified_time" content="2020-07-28T14:26:03.701Z">
+<meta property="article:author" content="fltermare">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>My Command Line Cheat Sheet</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/07/18/Examples-of-Docker-Multi-stage-Builds/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&text=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&is_video=false&description=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=My Command Line Cheat Sheet&body=Check out this article: http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&name=My Command Line Cheat Sheet&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&t=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tar"><span class="toc-number">1.</span> <span class="toc-text">tar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#split"><span class="toc-number">2.</span> <span class="toc-text">split</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pcap"><span class="toc-number">3.</span> <span class="toc-text">pcap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7zip"><span class="toc-number">4.</span> <span class="toc-text">7zip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#grep"><span class="toc-number">5.</span> <span class="toc-text">grep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#awk"><span class="toc-number">6.</span> <span class="toc-text">awk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim"><span class="toc-number">7.</span> <span class="toc-text">vim</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        My Command Line Cheat Sheet
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Fltermare Learning Note</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-07-28T14:24:06.000Z" itemprop="datePublished">2020-07-28</time>
+        
+        (Updated: <time datetime="2020-07-28T14:26:03.701Z" itemprop="dateModified">2020-07-28</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/TechMemo/">TechMemo</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/" rel="tag">Linux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><ul>
+<li><p>create tar.gz</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zcvf tar-archive-name.tar.gz source-folder-name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>extract tar.gz</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxvf tar-archive-name.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>create tar.gz (pigz)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar cv filename | pigz -6 -p 10 -k &gt; filename.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li><p>decompress</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -I pigz -xv filename.tar.gz</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="split"><a href="#split" class="headerlink" title="split"></a>split</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ split -b 200M linux-mint-18.tar.gz &quot;ISO-archive.part&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat home.tar.bz2.parta* &gt; backup.tar.gz.joined</span><br></pre></td></tr></table></figure>
+
+<h2 id="pcap"><a href="#pcap" class="headerlink" title="pcap"></a>pcap</h2><ul>
+<li><p>check file type (pcap vs pcapng)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ capinfos -t [file]</span><br></pre></td></tr></table></figure></li>
+<li><p>turn pcapng into pcap</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ editcap -F pcap &lt;input-pcapng-file&gt; &lt;output-pcap-file&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>change packet’s timestamp (reduce 1 hour; 60x60)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ editcap -t -3600 input_dump output_dump</span><br></pre></td></tr></table></figure></li>
+<li><p>install bittwist (centos: build from src code)</p>
+</li>
+<li><p>replace old ip (10.0.2.15) with new ip (1.144.118.53)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bittwiste -I input_dump -O output_dump -T ip -s 10.0.2.15,1.144.118.53 -d 10.0.2.15,1.144.118.53</span><br></pre></td></tr></table></figure></li>
+<li><p>merge 2 pcap files (ctu20.pcap ctu29.pcap)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mergecap -w &lt;outfile&gt; [&lt;infile&gt; ...i]</span><br></pre></td></tr></table></figure></li>
+<li><p>extract packets between a specific timeperiod </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ editcap -v -A &quot;1970-01-01 08:00:00&quot; -B &quot;1970-01-01 11:00:00&quot; input_dump output_dump</span><br></pre></td></tr></table></figure></li>
+<li><p>split pcap file based on specific time inverval (second)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ editcap -i &lt;seconds&gt; &lt;input_file&gt; &lt;output_prefix&gt;.pcapng</span><br></pre></td></tr></table></figure></li>
+<li><p>scapy</p>
+<ul>
+<li><a href="https://github.com/secdev/scapy" target="_blank" rel="noopener">https://github.com/secdev/scapy</a></li>
+</ul>
+</li>
+<li><p>IP address display filter</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tshark -r &lt;pcap_file&gt; -T fields -e ip.addr -Y &quot;ip.addr &#x3D;&#x3D; 1.1.1.1&#x2F;24&quot;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="7zip"><a href="#7zip" class="headerlink" title="7zip"></a>7zip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ 7za x ?</span><br></pre></td></tr></table></figure>
+
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><ul>
+<li>Search whether there are flows using  port 514  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep &#39;&quot;, \(514, [0-9]*\|[0-9]*, 514\)], &quot;byte&quot;&#39; *</span><br><span class="line">find .&#x2F;*&#x2F;* -type f -exec grep -l &#39;&quot;, \(514, [0-9]*\|[0-9]*, 514\)], &quot;byte&quot;&#39; &#123;&#125; +</span><br></pre></td></tr></table></figure></li>
+<li>-v :invert -E: use regex  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -v -E &quot;(xuite|hamicloud|googleapis|hinet)&quot;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><ul>
+<li>split line by “\t”; print all columns (1 to NF)  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat [log] | awk -F &quot;\t&quot; &#39;&#123;for(i&#x3D;1;i&lt;NF;i++)&#123;printf &quot;%s&quot;, $i&#125; &#123;printf &quot;\n&quot;&#125;&#125;&#39;</span><br></pre></td></tr></table></figure></li>
+<li>similar to the previous one  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat [log] | awk -F &quot;\t&quot; &#39;BEGIN&#123;OFS&#x3D;&quot;,&quot;&#125; &#123;printf &quot;%s |&quot;, $6; for(i&#x3D;10;i&lt;&#x3D;17;i++)&#123;printf &quot;%s,&quot;, $i&#125;; printf &quot;\n&quot;&#125;&#39;|sort|uniq</span><br></pre></td></tr></table></figure></li>
+<li>print all columns except i==2 and i==3  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat [log] | awk -F &quot;\t&quot; &#39;&#123;for(i&#x3D;1;i&lt;&#x3D;NF;i++)&#123;if(i!&#x3D;2 &amp;&amp; i!&#x3D;3)&#123;printf &quot;%s&quot;, $i&#125;&#125; &#123;printf &quot;\n&quot;&#125;&#125;&#39;</span><br></pre></td></tr></table></figure></li>
+<li>print line if column 4 or column 6 match the pattern  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat [log] | awk -F &quot;\t&quot; &quot;&#123;if (\$4 ~ &#x2F;$pattern&#x2F; || \$6 ~ &#x2F;$pattern&#x2F;) print&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><ul>
+<li><p>format(Indent) the whole file</p>
+<ul>
+<li>gg: from first line; G: to last line; =: Indent<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gg&#x3D;G</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>format(Indent) line 100 to line 200</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">100G&#x3D;200G</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tar"><span class="toc-number">1.</span> <span class="toc-text">tar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#split"><span class="toc-number">2.</span> <span class="toc-text">split</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pcap"><span class="toc-number">3.</span> <span class="toc-text">pcap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7zip"><span class="toc-number">4.</span> <span class="toc-text">7zip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#grep"><span class="toc-number">5.</span> <span class="toc-text">grep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#awk"><span class="toc-number">6.</span> <span class="toc-text">awk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim"><span class="toc-number">7.</span> <span class="toc-text">vim</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&text=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&is_video=false&description=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=My Command Line Cheat Sheet&body=Check out this article: http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&title=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&name=My Command Line Cheat Sheet&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://yoursite.com/2020/07/28/My-Command-Line-Cheat-Sheet/&t=My Command Line Cheat Sheet" target="_blank" rel="noopener"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    fltermare
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-169311487-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'fltermare-blog';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+
+</body>
+</html>
