@@ -14,7 +14,7 @@
 <meta property="og:description" content="IntroductionPython 有 argparse 可用，不曉得 Bash 是否有類似的模組能用?結果是當然有 &quot;getopts&quot;事實上，之前也用過一兩次。這次特別把它記錄下來 getopts基本上用法如下: 1getopts optstring optname [ arg ] 此篇僅記錄 short option ，若有 long-form (e.g. --path)">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-08-05T13:25:28.000Z">
-<meta property="article:modified_time" content="2020-08-05T13:28:49.303Z">
+<meta property="article:modified_time" content="2020-08-05T13:30:10.192Z">
 <meta property="article:author" content="fltermare">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Bash">
@@ -80,6 +80,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2020/08/05/Docker-Local-Registry/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2020/07/28/My-Command-Line-Cheat-Sheet/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -135,7 +137,7 @@
       
         <time datetime="2020-08-05T13:25:28.000Z" itemprop="datePublished">2020-08-05</time>
         
-        (Updated: <time datetime="2020-08-05T13:28:49.303Z" itemprop="dateModified">2020-08-05</time>)
+        (Updated: <time datetime="2020-08-05T13:30:10.192Z" itemprop="dateModified">2020-08-05</time>)
         
       
     </div>
@@ -185,7 +187,7 @@
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ bash test.sh -b <span class="number">5566</span> -d -c <span class="number">56</span></span><br><span class="line">Process b : OPTIND is <span class="number">3</span></span><br><span class="line">Process d : OPTIND is <span class="number">4</span></span><br><span class="line">Process c : OPTIND is <span class="number">6</span></span><br><span class="line">a = <span class="number">0</span></span><br><span class="line">b = <span class="number">5566</span></span><br><span class="line">c = <span class="number">56</span></span><br><span class="line">d = <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bash test.sh -A</span><br><span class="line">Process ? : OPTIND is <span class="number">2</span></span><br><span class="line"><span class="built_in">help</span> message</span><br></pre></td></tr></table></figure>
 
-<h3 id="optstring-前是否有"><a href="#optstring-前是否有" class="headerlink" title="optstring 前是否有 : ?"></a>optstring 前是否有 <code>:</code> ?</h3><p>這困擾我一陣子，網路上的範例有些有，有些無，搞不清楚到底最前面要不要加？<br>後來看到有人解釋:</p>
+<h3 id="optstring-前是否有"><a href="#optstring-前是否有" class="headerlink" title="optstring 前是否有 : ?"></a>optstring 前是否有 <code>:</code> ?</h3><p>這困擾我一陣子，網路上的範例有些有，有些無，搞不清楚最前面到底要不要加？<br>後來看到有人解釋:</p>
 <ul>
 <li>有 <code>:</code> 代表<strong>關閉</strong> default error handling</li>
 <li>無 <code>:</code> 代表<strong>啟用</strong> default error handling<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># disable default error handling</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">getopts</span> <span class="string">":ab:c:dh"</span> opt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># enable default error handling</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">getopts</span> <span class="string">"ab:c:dh"</span> opt;</span><br></pre></td></tr></table></figure>
