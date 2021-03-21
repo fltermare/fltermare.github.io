@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Python - decimal</title>
+      <link href="/2021/03/21/Python-decimal/"/>
+      <url>/2021/03/21/Python-decimal/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>前陣子，要把別人的 SQL 程式用 Python 重現<br>發現，有一部份的資料算出來的結果都有些微的誤差，人工驗算後才發現是浮點數 (floating-point) 的問題</p><h2 id="decimal"><a href="#decimal" class="headerlink" title="decimal"></a>decimal</h2><p>以下就是跟天真的我預想不一樣的例子</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="number">3.15</span></span><br><span class="line">round(f, <span class="number">1</span>)</span><br><span class="line"><span class="comment"># 3.1</span></span><br></pre></td></tr></table></figure><p>如果精度 (precision) 很重要，請使用內建的 <code>decimal</code> 這個模組</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> ROUND_HALF_UP, ROUND_HALF_EVEN, ROUND_UP </span><br><span class="line"><span class="comment"># 沒錯，rounding 規則也有很多種，要自己挑選</span></span><br><span class="line"><span class="comment"># 我自己是使用 ROUND_HALF_EVEN</span></span><br><span class="line"></span><br><span class="line">f = <span class="number">3.15</span></span><br><span class="line">Decimal(f)</span><br><span class="line"><span class="comment"># Decimal('3.149999999999999911182158029987476766109466552734375')</span></span><br><span class="line"></span><br><span class="line">Decimal(str(f)).quantize(Decimal(<span class="string">'.0'</span>), ROUND_HALF_EVEN)</span><br><span class="line"><span class="comment"># 3.2</span></span><br></pre></td></tr></table></figure><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul><li><a href="https://kirin.idv.tw/python-decimal-module-tutorial/" target="_blank" rel="noopener">https://kirin.idv.tw/python-decimal-module-tutorial/</a></li><li><a href="https://docs.python.org/3/library/decimal.html" target="_blank" rel="noopener">https://docs.python.org/3/library/decimal.html</a></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker - Local Registry</title>
       <link href="/2020/08/05/Docker-Local-Registry/"/>
       <url>/2020/08/05/Docker-Local-Registry/</url>
