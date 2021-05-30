@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Bash - Tag - FLTERMARE&#39;s NOTE</title>
-        <link>https://fltermare.github.io/tags/bash/</link>
+        <link>https://fltermare.tw/tags/bash/</link>
         <description>Bash - Tag - FLTERMARE&#39;s NOTE</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</lastBuildDate><atom:link href="https://fltermare.github.io/tags/bash/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</lastBuildDate><atom:link href="https://fltermare.tw/tags/bash/" rel="self" type="application/rss+xml" /><item>
     <title>Bash - use getopts to parse arguments</title>
-    <link>https://fltermare.github.io/bash-getopts/</link>
+    <link>https://fltermare.tw/bash-getopts/</link>
     <pubDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.github.io/bash-getopts/</guid>
+    <guid>https://fltermare.tw/bash-getopts/</guid>
     <description><![CDATA[Introduction Python 有 argparse 可用，不曉得 Bash 是否有類似的模組能用?
 結果是當然有 &quot;getopts&quot;
 事實上，之前也用過一兩次。這次特別把它記錄下來

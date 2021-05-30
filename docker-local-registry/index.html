@@ -11,12 +11,12 @@
 然後，發現 docker doc 其實寫得很完整，所以節錄自己用到的部分，也記錄之後要去哪裡找資料。
 Deploy a local registry server 1  docker run -d -p 5000:5000 --restart=always --name registry registry:2   Copy an image from Docker Hub to your registry  Pull the ubuntu:16.04 image from Docker Hub 1  docker pull ubuntu:16.04    Tag the image as localhost:5000/my-ubuntu 1  docker tag ubuntu:16." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fltermare.github.io/docker-local-registry/" />
-<meta property="og:image" content="https://fltermare.github.io/logo.png"/>
+<meta property="og:url" content="https://fltermare.tw/docker-local-registry/" />
+<meta property="og:image" content="https://fltermare.tw/logo.png"/>
 <meta property="article:published_time" content="2020-08-05T21:30:56+00:00" />
 <meta property="article:modified_time" content="2020-08-05T21:30:56+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://fltermare.github.io/logo.png"/>
+<meta name="twitter:image" content="https://fltermare.tw/logo.png"/>
 
 <meta name="twitter:title" content="Docker - Local Registry"/>
 <meta name="twitter:description" content="Intro 上線環境常常連不到外網，更不用提去 Dockerhub 拉 image 來用。通常是在內網建個公司用的 registry server，一來是降低連線到外網的風險、二來是能檢驗公司內用的 image 是否合規。 
@@ -26,7 +26,7 @@ Deploy a local registry server 1  docker run -d -p 5000:5000 --restart=always --
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.github.io/docker-local-registry/" /><link rel="prev" href="https://fltermare.github.io/bash-getopts/" /><link rel="next" href="https://fltermare.github.io/python-decimal/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.tw/docker-local-registry/" /><link rel="prev" href="https://fltermare.tw/bash-getopts/" /><link rel="next" href="https://fltermare.tw/python-decimal/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -34,9 +34,9 @@ Deploy a local registry server 1  docker run -d -p 5000:5000 --restart=always --
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/fltermare.github.io\/docker-local-registry\/"
+            "@id": "https:\/\/fltermare.tw\/docker-local-registry\/"
         },"genre": "posts","keywords": "Linux, docker","wordcount":  117 ,
-        "url": "https:\/\/fltermare.github.io\/docker-local-registry\/","datePublished": "2020-08-05T21:30:56+00:00","dateModified": "2020-08-05T21:30:56+00:00","publisher": {
+        "url": "https:\/\/fltermare.tw\/docker-local-registry\/","datePublished": "2020-08-05T21:30:56+00:00","dateModified": "2020-08-05T21:30:56+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -220,7 +220,7 @@ Deploy a local registry server 1  docker run -d -p 5000:5000 --restart=always --
                             <a class="link-to-markdown" href="/docker-local-registry/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.github.io/docker-local-registry/" data-title="Docker - Local Registry" data-hashtags="Linux,docker"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.github.io/docker-local-registry/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.github.io/docker-local-registry/" data-title="Docker - Local Registry" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.github.io/docker-local-registry/" data-title="Docker - Local Registry"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.github.io/docker-local-registry/" data-title="Docker - Local Registry" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.github.io/docker-local-registry/" data-title="Docker - Local Registry"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.tw/docker-local-registry/" data-title="Docker - Local Registry" data-hashtags="Linux,docker"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.tw/docker-local-registry/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.tw/docker-local-registry/" data-title="Docker - Local Registry" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.tw/docker-local-registry/" data-title="Docker - Local Registry"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.tw/docker-local-registry/" data-title="Docker - Local Registry" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.tw/docker-local-registry/" data-title="Docker - Local Registry"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>

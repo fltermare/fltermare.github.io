@@ -12,12 +12,12 @@ decimal 以下就是跟天真的我預想不一樣的例子
 1 2 3  f = 3.15 round(f, 1) # 3.1   如果精度 (precision) 很重要，請使用內建的 decimal 這個模組
 1 2 3 4 5 6 7 8 9 10 11  from decimal import Decimal from decimal import ROUND_HALF_UP, ROUND_HALF_EVEN, ROUND_UP # 沒錯，rounding 規則也有很多種，要自己挑選 # 我自己是使用 ROUND_HALF_EVEN f = 3.15 Decimal(f) # Decimal(&#39;3.149999999999999911182158029987476766109466552734375&#39;) Decimal(str(f)).quantize(Decimal(&#39;.0&#39;), ROUND_HALF_EVEN) # 3.2   References  https://kirin." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fltermare.github.io/python-decimal/" />
-<meta property="og:image" content="https://fltermare.github.io/logo.png"/>
+<meta property="og:url" content="https://fltermare.tw/python-decimal/" />
+<meta property="og:image" content="https://fltermare.tw/logo.png"/>
 <meta property="article:published_time" content="2021-03-21T14:20:15+00:00" />
 <meta property="article:modified_time" content="2021-03-21T14:20:15+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://fltermare.github.io/logo.png"/>
+<meta name="twitter:image" content="https://fltermare.tw/logo.png"/>
 
 <meta name="twitter:title" content="Python - decimal"/>
 <meta name="twitter:description" content="Introduction 前陣子，要把別人的 SQL 程式用 Python 重現
@@ -28,7 +28,7 @@ decimal 以下就是跟天真的我預想不一樣的例子
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.github.io/python-decimal/" /><link rel="prev" href="https://fltermare.github.io/docker-local-registry/" /><link rel="next" href="https://fltermare.github.io/python-multiprocessing/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.tw/python-decimal/" /><link rel="prev" href="https://fltermare.tw/docker-local-registry/" /><link rel="next" href="https://fltermare.tw/python-multiprocessing/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -36,9 +36,9 @@ decimal 以下就是跟天真的我預想不一樣的例子
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/fltermare.github.io\/python-decimal\/"
+            "@id": "https:\/\/fltermare.tw\/python-decimal\/"
         },"genre": "posts","keywords": "Python","wordcount":  66 ,
-        "url": "https:\/\/fltermare.github.io\/python-decimal\/","datePublished": "2021-03-21T14:20:15+00:00","dateModified": "2021-03-21T14:20:15+00:00","publisher": {
+        "url": "https:\/\/fltermare.tw\/python-decimal\/","datePublished": "2021-03-21T14:20:15+00:00","dateModified": "2021-03-21T14:20:15+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -192,7 +192,7 @@ decimal 以下就是跟天真的我預想不一樣的例子
                             <a class="link-to-markdown" href="/python-decimal/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.github.io/python-decimal/" data-title="Python - decimal" data-hashtags="Python"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.github.io/python-decimal/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.github.io/python-decimal/" data-title="Python - decimal" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.github.io/python-decimal/" data-title="Python - decimal"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.github.io/python-decimal/" data-title="Python - decimal" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.github.io/python-decimal/" data-title="Python - decimal"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.tw/python-decimal/" data-title="Python - decimal" data-hashtags="Python"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.tw/python-decimal/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.tw/python-decimal/" data-title="Python - decimal" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.tw/python-decimal/" data-title="Python - decimal"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.tw/python-decimal/" data-title="Python - decimal" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.tw/python-decimal/" data-title="Python - decimal"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>

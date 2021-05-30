@@ -1,24 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Linux - Tag - FLTERMARE&#39;s NOTE</title>
-        <link>https://fltermare.github.io/tags/linux/</link>
+        <link>https://fltermare.tw/tags/linux/</link>
         <description>Linux - Tag - FLTERMARE&#39;s NOTE</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 05 Aug 2020 21:30:56 &#43;0000</lastBuildDate><atom:link href="https://fltermare.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 05 Aug 2020 21:30:56 &#43;0000</lastBuildDate><atom:link href="https://fltermare.tw/tags/linux/" rel="self" type="application/rss+xml" /><item>
     <title>Docker - Local Registry</title>
-    <link>https://fltermare.github.io/docker-local-registry/</link>
+    <link>https://fltermare.tw/docker-local-registry/</link>
     <pubDate>Wed, 05 Aug 2020 21:30:56 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.github.io/docker-local-registry/</guid>
+    <guid>https://fltermare.tw/docker-local-registry/</guid>
     <description><![CDATA[Intro 上線環境常常連不到外網，更不用提去 Dockerhub 拉 image 來用。通常是在內網建個公司用的 registry server，一來是降低連線到外網的風險、二來是能檢驗公司內用的 image 是否合規。 
 這篇的目的在於，在本地建立個測試用的 registry server ，方便我自己測試 pull image 的過程是否有問題，畢竟公司的 registry server 也不是想測就測的。 
 然後，發現 docker doc 其實寫得很完整，所以節錄自己用到的部分，也記錄之後要去哪裡找資料。
 Deploy a local registry server 1  docker run -d -p 5000:5000 --restart=always --name registry registry:2   Copy an image from Docker Hub to your registry  Pull the ubuntu:16.04 image from Docker Hub 1  docker pull ubuntu:16.04    Tag the image as localhost:5000/my-ubuntu 1  docker tag ubuntu:16.]]></description>
 </item><item>
     <title>Bash - use getopts to parse arguments</title>
-    <link>https://fltermare.github.io/bash-getopts/</link>
+    <link>https://fltermare.tw/bash-getopts/</link>
     <pubDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.github.io/bash-getopts/</guid>
+    <guid>https://fltermare.tw/bash-getopts/</guid>
     <description><![CDATA[Introduction Python 有 argparse 可用，不曉得 Bash 是否有類似的模組能用?
 結果是當然有 &quot;getopts&quot;
 事實上，之前也用過一兩次。這次特別把它記錄下來
@@ -29,10 +29,10 @@ getopts 基本上用法如下:
 Example 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  #!/usr/bin/bash  a=0; b=0; c=0; d=0; while getopts &#34;:ab:c:dh&#34; opt; do echo &#34;Process $opt: OPTIND is $OPTIND&#34; case ${opt} in a) a=1 ;; b) b=$OPTARG ;; c) c=$OPTARG ;; d) d=1 ;; h | ?]]></description>
 </item><item>
     <title>My Command Line Cheat Sheet</title>
-    <link>https://fltermare.github.io/my-command-line-cheat-sheet/</link>
+    <link>https://fltermare.tw/my-command-line-cheat-sheet/</link>
     <pubDate>Tue, 28 Jul 2020 22:24:06 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.github.io/my-command-line-cheat-sheet/</guid>
+    <guid>https://fltermare.tw/my-command-line-cheat-sheet/</guid>
     <description><![CDATA[tar   create tar.gz
 1  $ tar -zcvf tar-archive-name.tar.gz source-folder-name     extract tar.gz
 1  $ tar -zxvf tar-archive-name.tar.gz     create tar.gz (pigz)

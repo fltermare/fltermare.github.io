@@ -19,12 +19,12 @@ Docker的部份請參考 https://docs.docker.com/engine/install/ubuntu/
 除非像敝司的網路環境，什麼都要設定 Proxy，不然這官網這一頁就很夠了
 Installation Nvidia Driver  先檢查是否有 ubuntu-drivers-common 這個工具 (我的環境是已安裝)" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" />
-<meta property="og:image" content="https://fltermare.github.io/logo.png"/>
+<meta property="og:url" content="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" />
+<meta property="og:image" content="https://fltermare.tw/logo.png"/>
 <meta property="article:published_time" content="2020-06-12T22:16:22+00:00" />
 <meta property="article:modified_time" content="2020-06-12T22:16:22+00:00" />
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://fltermare.github.io/logo.png"/>
+<meta name="twitter:image" content="https://fltermare.tw/logo.png"/>
 
 <meta name="twitter:title" content="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)"/>
 <meta name="twitter:description" content="前言 先前的經驗告訴我，建個 GPU 訓練環境是很麻煩的事
@@ -42,7 +42,7 @@ Installation Nvidia Driver  先檢查是否有 ubuntu-drivers-common 這個工�
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" /><link rel="prev" href="https://fltermare.github.io/hello-world/" /><link rel="next" href="https://fltermare.github.io/docker-commands/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" /><link rel="prev" href="https://fltermare.tw/hello-world/" /><link rel="next" href="https://fltermare.tw/docker-commands/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -50,9 +50,9 @@ Installation Nvidia Driver  先檢查是否有 ubuntu-drivers-common 這個工�
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/fltermare.github.io\/docker-x-tensorflow-x-mxnet-x-gpu\/"
+            "@id": "https:\/\/fltermare.tw\/docker-x-tensorflow-x-mxnet-x-gpu\/"
         },"genre": "posts","keywords": "docker, tensorflow, mxnet, GPU, CUDA","wordcount":  426 ,
-        "url": "https:\/\/fltermare.github.io\/docker-x-tensorflow-x-mxnet-x-gpu\/","datePublished": "2020-06-12T22:16:22+00:00","dateModified": "2020-06-12T22:16:22+00:00","publisher": {
+        "url": "https:\/\/fltermare.tw\/docker-x-tensorflow-x-mxnet-x-gpu\/","datePublished": "2020-06-12T22:16:22+00:00","dateModified": "2020-06-12T22:16:22+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -415,7 +415,7 @@ jupyter lab --ip=0.0.0.0 --port=8888 --notebook-dir=/home/user
                             <a class="link-to-markdown" href="/docker-x-tensorflow-x-mxnet-x-gpu/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)" data-hashtags="docker,tensorflow,mxnet,GPU,CUDA"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" data-hashtag="docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)"><i class="fab fa-evernote fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)" data-hashtags="docker,tensorflow,mxnet,GPU,CUDA"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" data-hashtag="docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/" data-title="Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)"><i class="fab fa-evernote fa-fw"></i></a></span>
             </div>
         </div>
     </div>
