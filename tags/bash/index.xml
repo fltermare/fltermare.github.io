@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Bash - Tag - FLTERMARE&#39;s NOTE</title>
+        <link>https://fltermare.github.io/tags/bash/</link>
+        <description>Bash - Tag - FLTERMARE&#39;s NOTE</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</lastBuildDate><atom:link href="https://fltermare.github.io/tags/bash/" rel="self" type="application/rss+xml" /><item>
+    <title>Bash - use getopts to parse arguments</title>
+    <link>https://fltermare.github.io/bash-getopts/</link>
+    <pubDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://fltermare.github.io/bash-getopts/</guid>
+    <description><![CDATA[Introduction Python 有 argparse 可用，不曉得 Bash 是否有類似的模組能用?
+結果是當然有 &quot;getopts&quot;
+事實上，之前也用過一兩次。這次特別把它記錄下來
+getopts 基本上用法如下:
+1  getopts optstring optname [ arg ]   此篇僅記錄 short option ，若有 long-form (e.g. --path) 的需求，請參考 https://www.shellscript.sh/tips/getopt/
+個人覺得相對複雜些，如果要寫得這麼完整，我可能就用 Python 改寫
+或之後有工作需要，我搞清楚了再來補齊這篇文章
+Example 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  #!/usr/bin/bash  a=0; b=0; c=0; d=0; while getopts &#34;:ab:c:dh&#34; opt; do echo &#34;Process $opt: OPTIND is $OPTIND&#34; case ${opt} in a) a=1 ;; b) b=$OPTARG ;; c) c=$OPTARG ;; d) d=1 ;; h | ?]]></description>
+</item></channel>
+</rss>

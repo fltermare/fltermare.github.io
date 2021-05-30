@@ -1,0 +1,28 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Python - Tag - FLTERMARE&#39;s NOTE</title>
+        <link>https://fltermare.github.io/tags/python/</link>
+        <description>Python - Tag - FLTERMARE&#39;s NOTE</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 29 May 2021 10:54:32 &#43;0000</lastBuildDate><atom:link href="https://fltermare.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Python - multiprocessing</title>
+    <link>https://fltermare.github.io/python-multiprocessing/</link>
+    <pubDate>Sat, 29 May 2021 10:54:32 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://fltermare.github.io/python-multiprocessing/</guid>
+    <description><![CDATA[Introduction 以往需要用到 multi-processing 時大多都是使用 concurrent.futures 來處理
+最近有機會使用到其他的 Library，把常見的幾種方式紀錄下來
+Task 常見的模式，有個需要重複 N 次的 task， task 內的邏輯都一樣，唯一的差異在於輸入的參數，task 執行時也不相依於其他 task
+ example：  Input： 長度 100 的 list 使用 10 個 workers， task 處理的部份 Output： 預期同樣是長度 100 的 list; 順序可能會變    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  ┌───────────┐ ┌───────────┐ ─┐ │ input 1 │ ┌───────────┐ │ output 3 │ │ ├───────────┤ │ worker 1 │ ├───────────┤ │ │ input 2 │ └───────────┘ │ output 1 │ │ ├───────────┤ ├───────────┤ │ │ input 3 │ │ output 4 │ │ ├───────────┤ ┌───────────┐ ├───────────┤ │ │ input 4 │ │ worker 2 │ │ output 2 │ │ 100 ├───────────┤ ──────────► └───────────┘ ─────────►├───────────┤ │ │ input 5 │ .]]></description>
+</item><item>
+    <title>Python - decimal</title>
+    <link>https://fltermare.github.io/python-decimal/</link>
+    <pubDate>Sun, 21 Mar 2021 14:20:15 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://fltermare.github.io/python-decimal/</guid>
+    <description><![CDATA[Introduction 前陣子，要把別人的 SQL 程式用 Python 重現
+發現，有一部份的資料算出來的結果都有些微的誤差，人工驗算後才發現是浮點數 (floating-point) 的問題
+decimal 以下就是跟天真的我預想不一樣的例子
+1 2 3  f = 3.15 round(f, 1) # 3.1   如果精度 (precision) 很重要，請使用內建的 decimal 這個模組
+1 2 3 4 5 6 7 8 9 10 11  from decimal import Decimal from decimal import ROUND_HALF_UP, ROUND_HALF_EVEN, ROUND_UP # 沒錯，rounding 規則也有很多種，要自己挑選 # 我自己是使用 ROUND_HALF_EVEN f = 3.15 Decimal(f) # Decimal(&#39;3.149999999999999911182158029987476766109466552734375&#39;) Decimal(str(f)).quantize(Decimal(&#39;.0&#39;), ROUND_HALF_EVEN) # 3.2   References  https://kirin.]]></description>
+</item></channel>
+</rss>

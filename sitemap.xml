@@ -1,0 +1,26 @@
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>https://fltermare.github.io/categories/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/posts/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/tags/python/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/python-multiprocessing/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/tags/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/categories/techmemo/</loc><lastmod>2021-05-29T10:54:32&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://fltermare.github.io/python-decimal/</loc><lastmod>2021-03-21T14:20:15&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/docker/</loc><lastmod>2020-08-05T21:30:56&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/docker-local-registry/</loc><lastmod>2020-08-05T21:30:56&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/linux/</loc><lastmod>2020-08-05T21:30:56&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/bash/</loc><lastmod>2020-08-05T21:25:28&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/bash-getopts/</loc><lastmod>2020-08-05T21:25:28&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/my-command-line-cheat-sheet/</loc><lastmod>2020-07-28T22:24:06&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/examples-of-docker-multi-stage-builds/</loc><lastmod>2020-07-18T15:44:07&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/docker-commands/</loc><lastmod>2020-07-15T17:51:50&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/cuda/</loc><lastmod>2020-06-12T22:16:22&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/docker-x-tensorflow-x-mxnet-x-gpu/</loc><lastmod>2020-06-12T22:16:22&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/gpu/</loc><lastmod>2020-06-12T22:16:22&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/mxnet/</loc><lastmod>2020-06-12T22:16:22&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/tags/tensorflow/</loc><lastmod>2020-06-12T22:16:22&#43;00:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://fltermare.github.io/hello-world/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
