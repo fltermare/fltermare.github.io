@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Examples of Docker Multi-stage Builds - FLTERMARE&#39;s NOTE</title><meta name="Description" content="This is My New Hugo Site"><meta property="og:title" content="Examples of Docker Multi-stage Builds" />
+<meta property="og:description" content="Purpose 前陣子，在把專案製作成 docker image 的過程，想到幾個問題 :
+ 製作出的 image 理所當然要包含專案系統的功能。但是有需要包含 testing 的部分嗎 ? 不需要包含 testing 程式碼的話，要怎樣才能控制 docker build 的流程 ? 先不論程式碼，有辦法維護一個 Dockerfile 就同時符合 testing/production/&hellip; 多個需求嗎?  搜尋相關資訊後，看起來解法就是 &ldquo;docker multi-stage builds&rdquo; (Docker 17.05 later)
+以往同樣的程式要製作成不同用途 image (for testing, for production)，通常需要多個 Dockerfiles，透過 multi-stage builds 可以做到 :
+ 控制建構流程，達到一個 Dockerfile 可產生不同目的的 image ←我的主要需求 可以只複製某個 stage 的中間結果 → 不需要該 stage 的環境 → 節省 image 大小  Examples 以下 2 個範例，內容差不多
+Example 1 1 2 3 4 5 6 7 8 9  FROMalpine:3." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" />
+<meta property="og:image" content="https://fltermare.tw/logo.png"/>
+<meta property="article:published_time" content="2020-07-18T15:44:07+00:00" />
+<meta property="article:modified_time" content="2020-07-18T15:44:07+00:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://fltermare.tw/logo.png"/>
+
+<meta name="twitter:title" content="Examples of Docker Multi-stage Builds"/>
+<meta name="twitter:description" content="Purpose 前陣子，在把專案製作成 docker image 的過程，想到幾個問題 :
+ 製作出的 image 理所當然要包含專案系統的功能。但是有需要包含 testing 的部分嗎 ? 不需要包含 testing 程式碼的話，要怎樣才能控制 docker build 的流程 ? 先不論程式碼，有辦法維護一個 Dockerfile 就同時符合 testing/production/&hellip; 多個需求嗎?  搜尋相關資訊後，看起來解法就是 &ldquo;docker multi-stage builds&rdquo; (Docker 17.05 later)
+以往同樣的程式要製作成不同用途 image (for testing, for production)，通常需要多個 Dockerfiles，透過 multi-stage builds 可以做到 :
+ 控制建構流程，達到一個 Dockerfile 可產生不同目的的 image ←我的主要需求 可以只複製某個 stage 的中間結果 → 不需要該 stage 的環境 → 節省 image 大小  Examples 以下 2 個範例，內容差不多
+Example 1 1 2 3 4 5 6 7 8 9  FROMalpine:3."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" /><link rel="prev" href="https://fltermare.tw/2020/07/docker-commands/" /><link rel="next" href="https://fltermare.tw/2020/07/my-command-line-cheat-sheet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Examples of Docker Multi-stage Builds",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/fltermare.tw\/2020\/07\/examples-of-docker-multi-stage-builds\/"
+        },"genre": "posts","keywords": "docker","wordcount":  509 ,
+        "url": "https:\/\/fltermare.tw\/2020\/07\/examples-of-docker-multi-stage-builds\/","datePublished": "2020-07-18T15:44:07+00:00","dateModified": "2020-07-18T15:44:07+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "fltermare"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="FLTERMARE&#39;s NOTE">FLTERMARE&#39;s NOTE</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="FLTERMARE&#39;s NOTE">FLTERMARE&#39;s NOTE</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Examples of Docker Multi-stage Builds</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>fltermare</a></span>&nbsp;<span class="post-category">included in <a href="/categories/techmemo/"><i class="far fa-folder fa-fw"></i>TechMemo</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-18">2020-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;509 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#purpose">Purpose</a></li>
+    <li><a href="#examples">Examples</a>
+      <ul>
+        <li><a href="#example-1">Example 1</a></li>
+        <li><a href="#example-2">Example 2</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="purpose">Purpose</h2>
+<p>前陣子，在把專案製作成 docker image 的過程，想到幾個問題 :</p>
+<ol>
+<li>製作出的 image 理所當然要包含專案系統的功能。但是有需要包含 testing 的部分嗎 ?</li>
+<li>不需要包含 testing 程式碼的話，要怎樣才能控制 docker build 的流程 ?</li>
+<li>先不論程式碼，有辦法維護一個 Dockerfile 就同時符合 testing/production/&hellip; 多個需求嗎?</li>
+</ol>
+<p>搜尋相關資訊後，看起來解法就是 <strong>&ldquo;docker multi-stage builds&rdquo;</strong> (Docker 17.05 later)<br>
+以往同樣的程式要製作成不同用途 image (for testing, for production)，通常需要多個 Dockerfiles，透過 multi-stage builds 可以做到 :</p>
+<ol>
+<li>控制建構流程，達到一個 Dockerfile 可產生不同目的的 image <em>←我的主要需求</em></li>
+<li>可以只複製某個 stage 的中間結果 → 不需要該 stage 的環境 → 節省 image 大小</li>
+</ol>
+<h2 id="examples">Examples</h2>
+<p>以下 2 個範例，內容差不多</p>
+<h3 id="example-1">Example 1</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> alpine:3.12 AS base</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /root/</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileInit<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> base AS testing</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileTesting<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> base AS production</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileProduct<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>以上面這個 Dockerfile 而言，有 3 個 stages</p>
+<ul>
+<li>
+<p>stage 0</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> alpine:3.12 AS base</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /root/</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileInit<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>FROM [image] AS [name]</code></strong>
+<ul>
+<li><code>FROM</code> 搭配 <code>AS</code> 可以命名該 stage</li>
+</ul>
+</li>
+<li>這裡把 <code>alpine:3.12</code> 命名為 <code>base</code></li>
+<li>建立一個 fileInit 檔案</li>
+</ul>
+</li>
+<li>
+<p>stage 1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> base AS testing</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileTesting<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>把 <code>base</code> 當作 parent image，並將此 stage 命名為 <code>testing</code></li>
+<li>建立一個 fileTesting 檔案</li>
+</ul>
+</li>
+<li>
+<p>stage 2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> base AS production</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileProduct<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>把 <code>base</code> 當作 parent image，並將此 stage 命名為 <code>production</code></p>
+</li>
+<li>
+<p>建立一個 fileProduct 檔案</p>
+</li>
+<li>
+<p>因為是把 <code>base</code> 當作 parent image，代表流程是 <code>base</code> → <code>production</code>，中間不包含 <code>testing</code>，代表製作的 image 不包含 <code>testing</code> 的資訊。</p>
+<p><strong>→ &ldquo;fileTesting 不存在&rdquo;</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Build image - EX1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Production</span>
+docker build -t multi1 --target production -f Dockerfile .
+docker build -t multi1 -f Dockerfile .
+
+<span class="c1"># Test</span>
+docker build -t multi1 --target testing -f Dockerfile .
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>透過 <code>--target</code> 指定流程走到哪個 stage 結束</li>
+<li>若 <code>--target production</code>，代表從頭 (<code>base</code>) 走到尾 (<code>production</code>)
+<ul>
+<li>詳細去看 log 的話，<code>testing</code> 也會被執行，只是以 <a href="#Example-1" rel="">Example 1</a> 而言， image 不會包含 <code>testing</code> 的資訊</li>
+</ul>
+</li>
+<li>若 <code>--target testing</code>，代表從 <code>base</code> 到 <code>testing</code></li>
+<li>把 <code>touch file</code> 改成自己需要的指令 (python main.py | python -m pytest | &hellip; )，就能完成一個多目的的 Dockerfile :
+<ol>
+<li>確保各用途的 image 都有一樣的環境</li>
+<li>stage <code>testing</code> 才把測試用的程式碼與測試資料放到 image 中，產生 <code>production</code> image 時，就不會包含測試的資料與程式碼</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-2">Example 2</h3>
+<p><a href="#example-1" rel="">Example 1</a> 透過 <code>--target</code> 控制流程，<a href="#example-2" rel="">Example 2</a> 則是透過 <code>--build-arg</code> 來達到目的。<br>
+個人認為 <a href="#example-2" rel="">Example 2</a> 較有彈性。專案可能越來越複雜，testing image跟 production image 不見得在最後才有差異。這種情況下，<code>--target</code> 不見得夠用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">ARG</span> <span class="nv">BUILD_TYPE</span><span class="o">=</span><span class="s1">&#39;production&#39;</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> alpine:3.12 AS base</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /root/</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileInit<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> golang:1.14.6 AS go-build</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /go</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> hello.go .<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> go build -o hello .<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> base AS testing</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileTesting<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> base AS production</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileProduct<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> ${BUILD_TYPE} as after</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> after</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileFinal<span class="err">
+</span><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>go-build /go/hello .<span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span> <span class="s2">&#34;./hello&#34;</span> <span class="p">]</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>--build-arg</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/docker_multistage_build_ex2.png"
+        data-srcset="/img/docker_multistage_build_ex2.png, /img/docker_multistage_build_ex2.png 1.5x, /img/docker_multistage_build_ex2.png 2x"
+        data-sizes="auto"
+        alt="/img/docker_multistage_build_ex2.png"
+        title="build flow" /></p>
+<p>先不考慮 stage <code>go-build</code> 以及 <code>COPY</code> 指令的話<br>
+就如前面所說，是透過 <code>--build-arg</code> (<code>BUILD_TYPE</code>) 來控制建構流程，順序如下</p>
+<ol>
+<li>base</li>
+<li>testing | production       # 根據 BUILD_TYPE</li>
+<li>after</li>
+</ol>
+</li>
+<li>
+<p>COPY (stage 1 &amp; stage 5)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="k">FROM</span><span class="s"> golang:1.14.6 AS go-build</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /go</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> hello.go .<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> go build -o hello .<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> after</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> touch fileFinal<span class="err">
+</span><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>go-build /go/hello .<span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span> <span class="s2">&#34;./hello&#34;</span> <span class="p">]</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>COPY --from=[stage name] ...</code></strong>
+<ul>
+<li>從指定的 stage A 複製特定檔案到該 stage B</li>
+</ul>
+</li>
+<li>(line: 8) 複製 stage <code>go-build</code> 產生的可執行檔 <code>hello</code> 到 stage <code>after</code> 中</li>
+<li>stage <code>after</code> 需要執行 <code>hello</code>，因此對使用者而言，stage <code>go-build</code> 唯一需要保留的就是<code>hello</code>。透過 multi-stage build，最終產生的 image 不會包含 stage <code>go-build</code> 的 go 環境
+<ul>
+<li>減少 image 大小</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Build image - EX2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Production</span>
+docker build -t multi2 --build-arg <span class="nv">BUILD_TYPE</span><span class="o">=</span>production -f Dockerfile .
+docker build -t multi2 -f Dockerfile .
+
+<span class="c1"># Test</span>
+docker build -t multi2 --build-arg <span class="nv">BUILD_TYPE</span><span class="o">=</span>testing -f Dockerfile .
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>類似 <a href="#build-image---ex1" rel="">Build image - EX1</a>，只是改由 <code>--build-arg</code> 來指定流程</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>基本上，知道下面兩個指令的作用</p>
+<ol>
+<li><code>FROM [image] AS [name]</code></li>
+<li><code>COPY --from=[stage name] ...</code></li>
+</ol>
+<p>搭配 docker build 的兩個參數</p>
+<ol>
+<li><code>--target</code></li>
+<li><code>--build-arg</code></li>
+</ol>
+<p>就能看懂用 multi-stage 的 Dockerfile，
+剩下就是從簡單的範例改出自己需要的 Dockerfile ~</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://docs.docker.com/develop/develop-images/multistage-build/">https://docs.docker.com/develop/develop-images/multistage-build/</a></li>
+<li><a href="https://www.docker.com/blog/advanced-dockerfiles-faster-builds-and-smaller-images-using-buildkit-and-multistage-builds/">https://www.docker.com/blog/advanced-dockerfiles-faster-builds-and-smaller-images-using-buildkit-and-multistage-builds/</a></li>
+<li><a href="https://kkc.github.io/2018/04/28/docker-note/">https://kkc.github.io/2018/04/28/docker-note/</a></li>
+<li><a href="https://jiepeng.me/2018/06/09/use-docker-multiple-stage-builds">https://jiepeng.me/2018/06/09/use-docker-multiple-stage-builds</a></li>
+<li><a href="https://tachingchen.com/tw/blog/docker-multi-stage-builds/">https://tachingchen.com/tw/blog/docker-multi-stage-builds/</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-07-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2020/07/examples-of-docker-multi-stage-builds/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" data-title="Examples of Docker Multi-stage Builds" data-hashtags="docker"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" data-hashtag="docker"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" data-title="Examples of Docker Multi-stage Builds" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" data-title="Examples of Docker Multi-stage Builds"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" data-title="Examples of Docker Multi-stage Builds" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/" data-title="Examples of Docker Multi-stage Builds"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">docker</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2020/07/docker-commands/" class="prev" rel="prev" title="Docker commands"><i class="fas fa-angle-left fa-fw"></i>Docker commands</a>
+            <a href="/2020/07/my-command-line-cheat-sheet/" class="next" rel="next" title="My Command Line Cheat Sheet">My Command Line Cheat Sheet<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">fltermare</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"photon-dark","issueTerm":"title","label":"","lightTheme":"github-light","repo":"fltermare/blog-comments"}},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-169311487-1', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-169311487-1" async></script></body>
+</html>

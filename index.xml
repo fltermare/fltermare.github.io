@@ -7,20 +7,20 @@
             <atom:link href="https://fltermare.tw/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>Python - multiprocessing</title>
-    <link>https://fltermare.tw/python-multiprocessing/</link>
+    <link>https://fltermare.tw/2021/05/python-multiprocessing/</link>
     <pubDate>Sat, 29 May 2021 10:54:32 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/python-multiprocessing/</guid>
+    <guid>https://fltermare.tw/2021/05/python-multiprocessing/</guid>
     <description><![CDATA[Introduction 以往需要用到 multi-processing 時大多都是使用 concurrent.futures 來處理
 最近有機會使用到其他的 Library，把常見的幾種方式紀錄下來
 Task 常見的模式，有個需要重複 N 次的 task， task 內的邏輯都一樣，唯一的差異在於輸入的參數，task 執行時也不相依於其他 task
  example：  Input： 長度 100 的 list 使用 10 個 workers， task 處理的部份 Output： 預期同樣是長度 100 的 list; 順序可能會變    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  ┌───────────┐ ┌───────────┐ ─┐ │ input 1 │ ┌───────────┐ │ output 3 │ │ ├───────────┤ │ worker 1 │ ├───────────┤ │ │ input 2 │ └───────────┘ │ output 1 │ │ ├───────────┤ ├───────────┤ │ │ input 3 │ │ output 4 │ │ ├───────────┤ ┌───────────┐ ├───────────┤ │ │ input 4 │ │ worker 2 │ │ output 2 │ │ 100 ├───────────┤ ──────────► └───────────┘ ─────────►├───────────┤ │ │ input 5 │ .]]></description>
 </item><item>
     <title>Python - decimal</title>
-    <link>https://fltermare.tw/python-decimal/</link>
+    <link>https://fltermare.tw/2021/03/python-decimal/</link>
     <pubDate>Sun, 21 Mar 2021 14:20:15 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/python-decimal/</guid>
+    <guid>https://fltermare.tw/2021/03/python-decimal/</guid>
     <description><![CDATA[Introduction 前陣子，要把別人的 SQL 程式用 Python 重現
 發現，有一部份的資料算出來的結果都有些微的誤差，人工驗算後才發現是浮點數 (floating-point) 的問題
 decimal 以下就是跟天真的我預想不一樣的例子
@@ -28,20 +28,20 @@ decimal 以下就是跟天真的我預想不一樣的例子
 1 2 3 4 5 6 7 8 9 10 11  from decimal import Decimal from decimal import ROUND_HALF_UP, ROUND_HALF_EVEN, ROUND_UP # 沒錯，rounding 規則也有很多種，要自己挑選 # 我自己是使用 ROUND_HALF_EVEN f = 3.15 Decimal(f) # Decimal(&#39;3.149999999999999911182158029987476766109466552734375&#39;) Decimal(str(f)).quantize(Decimal(&#39;.0&#39;), ROUND_HALF_EVEN) # 3.2   References  https://kirin.]]></description>
 </item><item>
     <title>Docker - Local Registry</title>
-    <link>https://fltermare.tw/docker-local-registry/</link>
+    <link>https://fltermare.tw/2020/08/docker-local-registry/</link>
     <pubDate>Wed, 05 Aug 2020 21:30:56 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/docker-local-registry/</guid>
+    <guid>https://fltermare.tw/2020/08/docker-local-registry/</guid>
     <description><![CDATA[Intro 上線環境常常連不到外網，更不用提去 Dockerhub 拉 image 來用。通常是在內網建個公司用的 registry server，一來是降低連線到外網的風險、二來是能檢驗公司內用的 image 是否合規。 
 這篇的目的在於，在本地建立個測試用的 registry server ，方便我自己測試 pull image 的過程是否有問題，畢竟公司的 registry server 也不是想測就測的。 
 然後，發現 docker doc 其實寫得很完整，所以節錄自己用到的部分，也記錄之後要去哪裡找資料。
 Deploy a local registry server 1  docker run -d -p 5000:5000 --restart=always --name registry registry:2   Copy an image from Docker Hub to your registry  Pull the ubuntu:16.04 image from Docker Hub 1  docker pull ubuntu:16.04    Tag the image as localhost:5000/my-ubuntu 1  docker tag ubuntu:16.]]></description>
 </item><item>
     <title>Bash - use getopts to parse arguments</title>
-    <link>https://fltermare.tw/bash-getopts/</link>
+    <link>https://fltermare.tw/2020/08/bash-getopts/</link>
     <pubDate>Wed, 05 Aug 2020 21:25:28 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/bash-getopts/</guid>
+    <guid>https://fltermare.tw/2020/08/bash-getopts/</guid>
     <description><![CDATA[Introduction Python 有 argparse 可用，不曉得 Bash 是否有類似的模組能用?
 結果是當然有 &quot;getopts&quot;
 事實上，之前也用過一兩次。這次特別把它記錄下來
@@ -52,10 +52,10 @@ getopts 基本上用法如下:
 Example 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  #!/usr/bin/bash  a=0; b=0; c=0; d=0; while getopts &#34;:ab:c:dh&#34; opt; do echo &#34;Process $opt: OPTIND is $OPTIND&#34; case ${opt} in a) a=1 ;; b) b=$OPTARG ;; c) c=$OPTARG ;; d) d=1 ;; h | ?]]></description>
 </item><item>
     <title>My Command Line Cheat Sheet</title>
-    <link>https://fltermare.tw/my-command-line-cheat-sheet/</link>
+    <link>https://fltermare.tw/2020/07/my-command-line-cheat-sheet/</link>
     <pubDate>Tue, 28 Jul 2020 22:24:06 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/my-command-line-cheat-sheet/</guid>
+    <guid>https://fltermare.tw/2020/07/my-command-line-cheat-sheet/</guid>
     <description><![CDATA[tar   create tar.gz
 1  $ tar -zcvf tar-archive-name.tar.gz source-folder-name     extract tar.gz
 1  $ tar -zxvf tar-archive-name.tar.gz     create tar.gz (pigz)
@@ -63,10 +63,10 @@ Example 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  #!/usr/bin/
 1  $ tar -I pigz -xv filename.tar.gz     split 1  $ split -b 200M linux-mint-18.tar.gz &#34;ISO-archive.]]></description>
 </item><item>
     <title>Examples of Docker Multi-stage Builds</title>
-    <link>https://fltermare.tw/examples-of-docker-multi-stage-builds/</link>
+    <link>https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/</link>
     <pubDate>Sat, 18 Jul 2020 15:44:07 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/examples-of-docker-multi-stage-builds/</guid>
+    <guid>https://fltermare.tw/2020/07/examples-of-docker-multi-stage-builds/</guid>
     <description><![CDATA[Purpose 前陣子，在把專案製作成 docker image 的過程，想到幾個問題 :
  製作出的 image 理所當然要包含專案系統的功能。但是有需要包含 testing 的部分嗎 ? 不需要包含 testing 程式碼的話，要怎樣才能控制 docker build 的流程 ? 先不論程式碼，有辦法維護一個 Dockerfile 就同時符合 testing/production/&hellip; 多個需求嗎?  搜尋相關資訊後，看起來解法就是 &ldquo;docker multi-stage builds&rdquo; (Docker 17.05 later)
 以往同樣的程式要製作成不同用途 image (for testing, for production)，通常需要多個 Dockerfiles，透過 multi-stage builds 可以做到 :
@@ -74,18 +74,18 @@ Example 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  #!/usr/bin/
 Example 1 1 2 3 4 5 6 7 8 9  FROMalpine:3.]]></description>
 </item><item>
     <title>Docker commands</title>
-    <link>https://fltermare.tw/docker-commands/</link>
+    <link>https://fltermare.tw/2020/07/docker-commands/</link>
     <pubDate>Wed, 15 Jul 2020 17:51:50 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/docker-commands/</guid>
+    <guid>https://fltermare.tw/2020/07/docker-commands/</guid>
     <description><![CDATA[Run 1 2 3 4 5 6 7  $ docker run -it --rm -v $(pwd):/app:rw [image-name] [COMMAND] [ARG...] -i : Keep STDIN open even if not attached -t : Allocate a pseudo-tty -v : Bind mount a volume. --volume=[host-src:]container-dest[:&lt;options&gt;] --rm : automatically clean up the container and remove the file system when the container exits    ref: Docker run reference  Start start the stopped container
 1  $ docker start [container-name]   Save and Load image 1 2 3 4 5  # save as .]]></description>
 </item><item>
     <title>Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)</title>
-    <link>https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/</link>
+    <link>https://fltermare.tw/2020/06/docker-x-tensorflow-x-mxnet-x-gpu/</link>
     <pubDate>Fri, 12 Jun 2020 22:16:22 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/</guid>
+    <guid>https://fltermare.tw/2020/06/docker-x-tensorflow-x-mxnet-x-gpu/</guid>
     <description><![CDATA[前言 先前的經驗告訴我，建個 GPU 訓練環境是很麻煩的事
 最近想學習一下 Computer Vision，是時候再來弄個環境
 原先在猜，如果用 container 的方式來做說不定會比較簡單，也容易搬到別的地方部屬
@@ -100,10 +100,10 @@ Docker的部份請參考 https://docs.docker.com/engine/install/ubuntu/
 Installation Nvidia Driver  先檢查是否有 ubuntu-drivers-common 這個工具 (我的環境是已安裝)]]></description>
 </item><item>
     <title>Hello World</title>
-    <link>https://fltermare.tw/hello-world/</link>
+    <link>https://fltermare.tw/1/01/hello-world/</link>
     <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/hello-world/</guid>
+    <guid>https://fltermare.tw/1/01/hello-world/</guid>
     <description><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
 Quick Start Create a new post 1  $ hexo new &#34;My New Post&#34;   More info: Writing
 Run server 1  $ hexo server   More info: Server

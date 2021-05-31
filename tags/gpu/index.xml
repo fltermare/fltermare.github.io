@@ -5,10 +5,10 @@
         <description>GPU - Tag - FLTERMARE&#39;s NOTE</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 12 Jun 2020 22:16:22 &#43;0000</lastBuildDate><atom:link href="https://fltermare.tw/tags/gpu/" rel="self" type="application/rss+xml" /><item>
     <title>Environment Setup (Docker &#43; Tensorflow &#43; Mxnet &#43; GPU)</title>
-    <link>https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/</link>
+    <link>https://fltermare.tw/2020/06/docker-x-tensorflow-x-mxnet-x-gpu/</link>
     <pubDate>Fri, 12 Jun 2020 22:16:22 &#43;0000</pubDate>
     <author>Author</author>
-    <guid>https://fltermare.tw/docker-x-tensorflow-x-mxnet-x-gpu/</guid>
+    <guid>https://fltermare.tw/2020/06/docker-x-tensorflow-x-mxnet-x-gpu/</guid>
     <description><![CDATA[前言 先前的經驗告訴我，建個 GPU 訓練環境是很麻煩的事
 最近想學習一下 Computer Vision，是時候再來弄個環境
 原先在猜，如果用 container 的方式來做說不定會比較簡單，也容易搬到別的地方部屬
