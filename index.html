@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://fltermare.tw/" />
 <meta property="og:image" content="https://fltermare.tw/logo.png"/>
-<meta property="og:updated_time" content="2021-05-29T10:54:32+00:00" />
+<meta property="og:updated_time" content="2021-06-05T14:45:55+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://fltermare.tw/logo.png"/>
 
@@ -103,6 +103,14 @@
         alt="/images/avatar.jpeg"
         title="/images/avatar.jpeg" /></a></div><h2 class="home-subtitle">A Software Engineer, Machine Leanring in Taiwan</h2><div class="links"><a href="https://github.com/fltermare" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/2021/06/python-decorator/">Python - decorator</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>fltermare</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-06-05">2021-06-05</time></span>&nbsp;<span class="post-category">included in <a href="/categories/techmemo/"><i class="far fa-folder fa-fw"></i>TechMemo</a></span></div><div class="content">Introduction 紀錄一下， decorator 怎麼用
+個人比較常使用到的情境是紀錄各個步驟(function)使用的時間 (e.g. pre-processing / training / inference &hellip;)
+個人的感想是
+ 如果不用 args 就選 function without args 如果需要 args 就選 class with args   full sample code:  https://gist.github.com/fltermare/32af9e5abf6bb0cd6e230ee755ee2f60    function without args 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  def decorator_func_without_args(func): @wraps(func) def wrapper(*args, **kargs): start_time = time.</div><div class="post-footer">
+        <a href="/2021/06/python-decorator/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/decorator/">decorator</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/2021/05/python-multiprocessing/">Python - multiprocessing</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>fltermare</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-05-29">2021-05-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/techmemo/"><i class="far fa-folder fa-fw"></i>TechMemo</a></span></div><div class="content">Introduction 以往需要用到 multi-processing 時大多都是使用 concurrent.futures 來處理
 最近有機會使用到其他的 Library，把常見的幾種方式紀錄下來
@@ -148,15 +156,6 @@ Example 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23  #!/usr/bin/
 1  $ tar -I pigz -xv filename.tar.gz     split 1  $ split -b 200M linux-mint-18.tar.gz &#34;ISO-archive.</div><div class="post-footer">
         <a href="/2020/07/my-command-line-cheat-sheet/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/2020/07/examples-of-docker-multi-stage-builds/">Examples of Docker Multi-stage Builds</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>fltermare</a></span>&nbsp;<span class="post-publish">published on <time datetime="2020-07-18">2020-07-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/techmemo/"><i class="far fa-folder fa-fw"></i>TechMemo</a></span></div><div class="content">Purpose 前陣子，在把專案製作成 docker image 的過程，想到幾個問題 :
- 製作出的 image 理所當然要包含專案系統的功能。但是有需要包含 testing 的部分嗎 ? 不需要包含 testing 程式碼的話，要怎樣才能控制 docker build 的流程 ? 先不論程式碼，有辦法維護一個 Dockerfile 就同時符合 testing/production/&hellip; 多個需求嗎?  搜尋相關資訊後，看起來解法就是 &ldquo;docker multi-stage builds&rdquo; (Docker 17.05 later)
-以往同樣的程式要製作成不同用途 image (for testing, for production)，通常需要多個 Dockerfiles，透過 multi-stage builds 可以做到 :
- 控制建構流程，達到一個 Dockerfile 可產生不同目的的 image ←我的主要需求 可以只複製某個 stage 的中間結果 → 不需要該 stage 的環境 → 節省 image 大小  Examples 以下 2 個範例，內容差不多
-Example 1 1 2 3 4 5 6 7 8 9  FROMalpine:3.</div><div class="post-footer">
-        <a href="/2020/07/examples-of-docker-multi-stage-builds/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">docker</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>

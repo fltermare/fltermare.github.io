@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://fltermare.tw/" />
 <meta property="og:image" content="https://fltermare.tw/logo.png"/>
-<meta property="og:updated_time" content="2021-05-29T10:54:32+00:00" />
+<meta property="og:updated_time" content="2021-06-05T14:45:55+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://fltermare.tw/logo.png"/>
 
@@ -103,6 +103,15 @@
         alt="/images/avatar.jpeg"
         title="/images/avatar.jpeg" /></a></div><h2 class="home-subtitle">A Software Engineer, Machine Leanring in Taiwan</h2><div class="links"><a href="https://github.com/fltermare" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/2020/07/examples-of-docker-multi-stage-builds/">Examples of Docker Multi-stage Builds</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>fltermare</a></span>&nbsp;<span class="post-publish">published on <time datetime="2020-07-18">2020-07-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/techmemo/"><i class="far fa-folder fa-fw"></i>TechMemo</a></span></div><div class="content">Purpose 前陣子，在把專案製作成 docker image 的過程，想到幾個問題 :
+ 製作出的 image 理所當然要包含專案系統的功能。但是有需要包含 testing 的部分嗎 ? 不需要包含 testing 程式碼的話，要怎樣才能控制 docker build 的流程 ? 先不論程式碼，有辦法維護一個 Dockerfile 就同時符合 testing/production/&hellip; 多個需求嗎?  搜尋相關資訊後，看起來解法就是 &ldquo;docker multi-stage builds&rdquo; (Docker 17.05 later)
+以往同樣的程式要製作成不同用途 image (for testing, for production)，通常需要多個 Dockerfiles，透過 multi-stage builds 可以做到 :
+ 控制建構流程，達到一個 Dockerfile 可產生不同目的的 image ←我的主要需求 可以只複製某個 stage 的中間結果 → 不需要該 stage 的環境 → 節省 image 大小  Examples 以下 2 個範例，內容差不多
+Example 1 1 2 3 4 5 6 7 8 9  FROMalpine:3.</div><div class="post-footer">
+        <a href="/2020/07/examples-of-docker-multi-stage-builds/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">docker</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/2020/07/docker-commands/">Docker commands</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>fltermare</a></span>&nbsp;<span class="post-publish">published on <time datetime="2020-07-15">2020-07-15</time></span>&nbsp;<span class="post-category">included in <a href="/categories/techmemo/"><i class="far fa-folder fa-fw"></i>TechMemo</a></span></div><div class="content">Run 1 2 3 4 5 6 7  $ docker run -it --rm -v $(pwd):/app:rw [image-name] [COMMAND] [ARG...] -i : Keep STDIN open even if not attached -t : Allocate a pseudo-tty -v : Bind mount a volume. --volume=[host-src:]container-dest[:&lt;options&gt;] --rm : automatically clean up the container and remove the file system when the container exits    ref: Docker run reference  Start start the stopped container
 1  $ docker start [container-name]   Save and Load image 1 2 3 4 5  # save as .</div><div class="post-footer">
