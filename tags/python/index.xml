@@ -11,8 +11,11 @@
     <guid>https://fltermare.tw/2021/06/python-decorator/</guid>
     <description><![CDATA[Introduction 紀錄一下， decorator 怎麼用
 個人比較常使用到的情境是紀錄各個步驟(function)使用的時間 (e.g. pre-processing / training / inference &hellip;)
-個人的感想是
- 如果不用 args 就選 function without args 如果需要 args 就選 class with args   full sample code:  https://gist.github.com/fltermare/32af9e5abf6bb0cd6e230ee755ee2f60    function without args 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  def decorator_func_without_args(func): @wraps(func) def wrapper(*args, **kargs): start_time = time.]]></description>
+透過 decorator 達到 1. 減少重複 code 2. 增加可讀性 的目的
+ full sample code:  https://gist.github.com/fltermare/32af9e5abf6bb0cd6e230ee755ee2f60    functools.wraps 使用 function 作為 decorator 時，記得要加上 functools.wraps 來重新包裝 func
+避免 __name__ &amp; __doc__ 跟預期的不同
+以下是 https://docs.python.org/3/library/functools.html#functools.wraps 的範例
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21  # with wraps from functools import wraps def my_decorator(f): @wraps(f) def wrapper(*args, **kwds): print(&#39;Calling decorated function&#39;) return f(*args, **kwds) return wrapper @my_decorator def example(): &#34;&#34;&#34;Docstring&#34;&#34;&#34; print(&#39;Called example function&#39;) &gt;&gt;&gt; example() Calling decorated function Called example function &gt;&gt;&gt; example.]]></description>
 </item><item>
     <title>Python - multiprocessing</title>
     <link>https://fltermare.tw/2021/05/python-multiprocessing/</link>
